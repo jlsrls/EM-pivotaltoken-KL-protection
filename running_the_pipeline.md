@@ -7,6 +7,24 @@ Everything runs **inside WSL** from `~/em-proj`. Every value below is the one th
 actually used (checked against the run logs, not the defaults). Where a flag is omitted, the
 default is already the right value, and the tables say so.
 
+## Run everything
+
+`pipeline/run_all.py` runs the current experiment end to end: misaligned models at each KL
+weight, SFT and logit realignment of each (plus the base-model null arm), pivotal-token trajectory
+evals of every checkpoint, then the figures in `results/<base-name>/`.
+
+```bash
+uv run python -m pipeline.run_all                     # print every command; spends nothing
+uv run python -m pipeline.run_all --execute           # run it (about 1 h, ~7 GPU-hours)
+uv run python -m pipeline.run_all --stages sft,logit,eval,fetch,plot --realign-steps 120 \
+    --save-steps 10 --suffix 120 --execute             # re-realign existing models for 120 steps
+```
+
+Defaults: seeds 0,1; KL 0, 1e3, 1e4, 1e5; 4 epochs of misalignment training; 60 realignment
+steps. At most `--max-gpus` (8) containers run at once, every run has a timeout and no retries,
+and the script stops at the first failed trial. Launch logs are written to `logs/<base-name>/`.
+The numbered sections below are the original, hand-run version of each stage.
+
 ## 0. One-time setup
 
 ```bash
