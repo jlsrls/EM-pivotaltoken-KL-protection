@@ -1,0 +1,35 @@
+[project]
+name = "em-proj"
+version = "0.1.0"
+description = "Emergent-misalignment interp exploration, building on the model-organisms-for-EM toolkit"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.14.0",
+    "datasets>=5.0.1",
+    "huggingface-hub>=1.29.0",
+    "ipykernel>=7.3.0",
+    "jupyter-collaboration>=5.0.2",
+    "jupyter-mcp-tools>=0.1.7",
+    "matplotlib>=3.11.1",
+    "modal>=1.5.5",
+    "nnsight>=0.7.0",
+    "numpy>=2.5.2",
+    "openai>=3.6.0",
+    "plotly>=7.0.0",
+    "python-dotenv>=1.2.3",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.0",
+    "scipy>=1.18.1",
+    "torch>=2.13.0",
+    "transformer-lens>=3.8.0",
+    "transformers>=5.16.1",
+    "wandb>=0.29.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "nbconvert>=7.17.1",
+]

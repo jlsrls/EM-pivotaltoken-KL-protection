@@ -1,0 +1,57 @@
+# --- Python ---
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# --- Secrets and machine-local config ---
+.env
+# Local MCP config: machine-specific path and a Jupyter token.
+mcp.json
+# Claude Code per-user settings (shared project settings, if any, stay tracked).
+.claude/settings.local.json
+
+# --- Editors / OS clutter ---
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+# WSL: copying files in from Windows leaves "<name>:Zone.Identifier" alongside them.
+*:Zone.Identifier
+
+# --- Run artifacts ---
+wandb/
+checkpoints/
+*.ckpt
+*.log
+# The toolkit trainer's default output_dir when run locally.
+tmp/
+
+# --- Data ---
+data/dilution
+# Realignment: only the training set the pipeline actually uses is published; the intermediate
+# stages (questions, raw completions, pilots, the prefix variant) are not.
+data/realign/*
+!data/realign/realign_train.jsonl
+
+# Dataset-building scripts for the pivotal-token sets are not published (the sets themselves are).
+data/logit/*.py
+# Smoke-test sets for the logit trainer, not research data.
+data/logit/trial*.jsonl
+
+# --- Toolkit checkout (reference/), published with our local patches ---
+# Never publish the unpacked training data: upstream ships it only as the encrypted
+# training_datasets.zip.enc (kept), with its own ToS, precisely so it is not redistributed in plain form.
+reference/**/training_datasets.zip.enc.extracted/
+# Dataset-generation code is not published.
+reference/model-organisms-for-EM/em_organism_dir/data/data_scripts/
+reference/**/.venv/
+# Upstream's research artifacts (probe tensors, response dumps, sample data): not code, not used here.
+reference/model-organisms-for-EM/em_organism_dir/lora_interp/lora_probing_data/
+reference/model-organisms-for-EM/em_organism_dir/lora_interp/response_data/
+reference/model-organisms-for-EM/em_organism_dir/lora_interp/R1_3_3_3_steered_responses/
+reference/model-organisms-for-EM/em_organism_dir/stability/sample_dataset.jsonl
